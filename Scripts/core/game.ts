@@ -46,7 +46,7 @@ var stats: Stats;
 var step: number = 0;
 var cubeGeometry:CubeGeometry;
 var cubeMaterial:LambertMaterial;
-
+var sun;
 
 function init() {
     // Instantiate a new Scene object
@@ -57,49 +57,94 @@ function init() {
     setupCamera(); // setup the camera
 	
     // add an axis helper to the scene
-    axes = new AxisHelper(10);
+    axes = new AxisHelper(100);
     scene.add(axes);
     console.log("Added Axis Helper to scene...");
     
+    
+    var geometry = new THREE.SphereGeometry( 10, 32, 32 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    sun = new THREE.Mesh( geometry, material );
+    sun.position.set(0, 0, 0);
+    
+    
+    var geometry1 = new THREE.SphereGeometry( .5, 32, 32 );
+    var material1 = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var planet1 = new THREE.Mesh( geometry1, material1 );
+    planet1.position.set(15, 0, 0);
+    
+    var geometry2 = new THREE.SphereGeometry( 1, 32, 32 );
+    var material2 = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var planet2 = new THREE.Mesh( geometry2, material2 );
+    planet2.position.set(25, 0, 0);
+    
+    var geometry3 = new THREE.SphereGeometry( 1.5, 32, 32 );
+    var material3 = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var planet3 = new THREE.Mesh( geometry3, material3 );
+    planet3.position.set(40, 0, 0);
+    
+    var geometry4 = new THREE.SphereGeometry( 4, 32, 32 );
+    var material4 = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var planet4 = new THREE.Mesh( geometry4, material4 );
+    planet4.position.set(70, 0, 0);
+    
+    var geometry5 = new THREE.SphereGeometry( 1, 32, 32 );
+    var material5 = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var planet5 = new THREE.Mesh( geometry5, material5 );
+    planet5.position.set(100, 0, 0);
+    
+    sun.add( planet1 );
+    sun.add( planet2 );
+    sun.add( planet3 );
+    sun.add( planet4 );
+    sun.add( planet5 );
+    scene.add( sun );
+    
+    
+    
+    
+    
+    
+    
     //Add a Plane to the Scene
-    plane = new gameObject(
-        new PlaneGeometry(20, 20, 1, 1),
-        new LambertMaterial({ color: 0xff00ff }),
-        0, 0, 0);
+    // plane = new gameObject(
+    //     new PlaneGeometry(20, 20, 1, 1),
+    //     new LambertMaterial({ color: 0xff00ff }),
+    //     0, 0, 0);
 
-    plane.rotation.x = -0.5 * Math.PI;
+    // plane.rotation.x = -0.5 * Math.PI;
 
-    scene.add(plane);
-    console.log("Added Plane Primitive to scene...");
+    // scene.add(plane);
+    // console.log("Added Plane Primitive to scene...");
     
-    //Add a Cube to the Scene
-    cubeMaterial = new LambertMaterial({color:0x00ff00});
-    cubeGeometry = new CubeGeometry(2, 2, 2);
-    cube = new Mesh(cubeGeometry, cubeMaterial);
-    cube.castShadow = true;
-    cube.receiveShadow = true;
-    cube.position.y = 1;
+    // //Add a Cube to the Scene
+    // cubeMaterial = new LambertMaterial({color:0x00ff00});
+    // cubeGeometry = new CubeGeometry(2, 2, 2);
+    // cube = new Mesh(cubeGeometry, cubeMaterial);
+    // cube.castShadow = true;
+    // cube.receiveShadow = true;
+    // cube.position.y = 1;
     
-    scene.add(cube);
-    console.log("Added Cube Primitive to scene...");
+    // scene.add(cube);
+    // console.log("Added Cube Primitive to scene...");
     
     
-    // Add an AmbientLight to the scene
-    ambientLight = new AmbientLight(0x090909);
-    scene.add(ambientLight);
-    console.log("Added an Ambient Light to Scene");
+    // // Add an AmbientLight to the scene
+    // ambientLight = new AmbientLight(0x090909);
+    // scene.add(ambientLight);
+    // console.log("Added an Ambient Light to Scene");
 	
-    // Add a SpotLight to the scene
-    spotLight = new SpotLight(0xffffff);
-    spotLight.position.set(5.6, 23.1, 5.4);
-    spotLight.rotation.set(-0.8, 42.7, 19.5);
-    spotLight.castShadow = true;
-    scene.add(spotLight);
-    console.log("Added a SpotLight Light to Scene");
+    // // Add a SpotLight to the scene
+    // spotLight = new SpotLight(0xffffff);
+    // spotLight.position.set(5.6, 23.1, 5.4);
+    // spotLight.rotation.set(-0.8, 42.7, 19.5);
+    // spotLight.castShadow = true;
+    // scene.add(spotLight);
+    // console.log("Added a SpotLight Light to Scene");
     
     // add controls
     gui = new GUI();
-    control = new Control(0.05);
+    control = new Control(0);
     addControl(control);
 
     // Add framerate stats
@@ -137,7 +182,7 @@ function addStatsObject() {
 function gameLoop(): void {
     stats.update();
 
-    cube.rotation.y += control.rotationSpeed;
+    sun.rotation.y += control.rotationSpeed;
     
     // render using requestAnimationFrame
     requestAnimationFrame(gameLoop);
@@ -149,7 +194,7 @@ function gameLoop(): void {
 // Setup default renderer
 function setupRenderer(): void {
     renderer = new Renderer();
-    renderer.setClearColor(0xEEEEEE, 1.0);
+    renderer.setClearColor(0x000000, 1.0);
     renderer.setSize(CScreen.WIDTH, CScreen.HEIGHT);
     //renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
@@ -160,9 +205,9 @@ function setupRenderer(): void {
 function setupCamera(): void {
     camera = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
     //camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.x = 0.6;
-    camera.position.y = 16;
-    camera.position.z = -20.5;
-    camera.lookAt(new Vector3(0, 0, 0));
+    camera.position.x = 0;
+    camera.position.y = 50;
+    camera.position.z = 150;
+    camera.lookAt(new Vector3(0, -25, 0));
     console.log("Finished setting up Camera...");
 }
