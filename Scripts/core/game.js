@@ -338,7 +338,7 @@ function setupCamera() {
     camera1 = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
     camera1.position.x = 15;
     camera1.position.y = 50;
-    camera1.position.z = 150;
+    camera1.position.z = 165;
     camera1.lookAt(new Vector3(0, -25, 0));
     console.log("Finished setting up Camera1...");
     camera2 = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
