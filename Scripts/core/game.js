@@ -1,5 +1,10 @@
 /// <reference path="_reference.ts"/>
 // MAIN GAME FILE
+//Source file name      game.ts
+//Last Modified by      Vishal Guleria
+//Date last Modified    February 25,2016
+//Program description   COMP392 - Assignment 2 - Solar System with 5 planets and 1 planet with 2 moons. Used 2 Cameras for the view and can be changed on run time via GUI.    
+//Revision History      v12
 // THREEJS Aliases
 var Scene = THREE.Scene;
 var Renderer = THREE.WebGLRenderer;
@@ -77,47 +82,50 @@ function init() {
     axes = new AxisHelper(150);
     scene.add(axes);
     console.log("Added Axis Helper to scene...");
-    // load a texture, set wrap mode to repeat
-    var texture = new THREE.TextureLoader().load("Texturers\1.png");
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(4, 4);
+    //Adding sun
     var geometry = new THREE.SphereGeometry(8, 32, 32);
     var material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
     sun = new THREE.Mesh(geometry, material);
     sun.position.set(0, 0, 0);
+    //Adding planet 1
     var geometry1 = new THREE.SphereGeometry(0.5, 32, 32);
     var material1 = new THREE.MeshLambertMaterial({ color: 0xE6E6E6 });
     iplanet1 = new Mesh;
     planet1 = new THREE.Mesh(geometry1, material1);
     iplanet1.position.set(0, 0, 0);
     planet1.position.set(30, 0, 0);
+    //Adding planet 2
     var geometry2 = new THREE.SphereGeometry(1, 32, 32);
     var material2 = new THREE.MeshLambertMaterial({ color: 0xf0e7e7 });
     iplanet2 = new Mesh;
     planet2 = new THREE.Mesh(geometry2, material2);
     iplanet2.position.set(0, 0, 0);
     planet2.position.set(35, 0, 0);
+    //Adding planet 3
     var geometry3 = new THREE.SphereGeometry(1.5, 32, 32);
     var material3 = new THREE.MeshLambertMaterial({ color: 0xc99039 });
     iplanet3 = new Mesh;
     iplanet3.position.set(0, 0, 0);
     planet3 = new THREE.Mesh(geometry3, material3);
     planet3.position.set(40, 0, 0);
+    //Adding planet 4
     var geometry4 = new THREE.SphereGeometry(4, 32, 32);
     var material4 = new THREE.MeshLambertMaterial({ color: 0x0000A0 });
+    //var material4 = new THREE.MeshLambertMaterial( {map: texture} );
     iplanet4 = new Mesh;
     iplanet4.position.set(0, 0, 0);
     planet4 = new THREE.Mesh(geometry4, material4);
     planet4.position.set(70, 0, 0);
     planet4.castShadow = true;
     planet4.receiveShadow = true;
+    //Adding planet 5
     var geometry5 = new THREE.SphereGeometry(1, 32, 32);
     var material5 = new THREE.MeshLambertMaterial({ color: 0xfff1d5 });
     iplanet5 = new Mesh;
     iplanet5.position.set(0, 0, 0);
     planet5 = new THREE.Mesh(geometry5, material5);
     planet5.position.set(100, 0, 0);
+    //Adding planet 6
     var geometry6 = new THREE.SphereGeometry(1.2, 32, 32);
     var material6 = new THREE.MeshLambertMaterial({ color: 0xFEFCD7 });
     iplanet6 = new Mesh;
@@ -126,6 +134,7 @@ function init() {
     planet6.position.set(10, 0, 0);
     planet6.castShadow = true;
     planet6.receiveShadow = true;
+    //Adding planet 7
     var geometry7 = new THREE.SphereGeometry(.8, 32, 32);
     var material7 = new THREE.MeshLambertMaterial({ color: 0x5b5ddf });
     iplanet7 = new Mesh;
@@ -134,6 +143,7 @@ function init() {
     planet7.position.set(15, 0, 0);
     planet7.castShadow = true;
     planet7.receiveShadow = true;
+    // Adding empty object and Planets to respective objects
     iplanet1.add(planet1);
     iplanet2.add(planet2);
     iplanet3.add(planet3);
@@ -150,6 +160,7 @@ function init() {
     scene.add(iplanet3);
     scene.add(iplanet4);
     scene.add(iplanet5);
+    //Adding Spotlights
     spotLight1 = new SpotLight(0xffffff, 2, 200);
     spotLight1.position.set(15, 0, 0);
     spotLight1.lookAt(new Vector3(150, 0, 0));
@@ -230,6 +241,9 @@ function init() {
     spotLight8.shadowCameraFar = 1;
     spotLight8.angle = Math.PI / 2;
     spotLight8.shadowCameraVisible = true;
+    //Adding spotlight to scene
+    ambientLight = new AmbientLight(0x010101);
+    scene.add(ambientLight);
     scene.add(spotLight1);
     scene.add(spotLight2);
     scene.add(spotLight3);

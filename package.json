@@ -1,5 +1,5 @@
 {
-  "name": "comp392-Assignment2-SolarSystem",
+  "name": "Comp392-Assignment2-SolarSystem",
   "version": "1.0.0",
   "description": "COMP392 - Assignment2-SolarSystem",
   "main": "game.js",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buntu88/COMP392-Assignment2-SolarSystem"
+    "url": "https://github.com/buntu88/COMP392-Assignment2-SolarSystem.git"
   },
   "author": "Vishal Guleria",
   "license": "MIT",
