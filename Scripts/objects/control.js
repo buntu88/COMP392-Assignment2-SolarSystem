@@ -4,8 +4,8 @@ var objects;
     // CONTROL CLASS ++++++++++++++++++++++++++++++++++++++++++
     var Control = (function () {
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++
-        function Control(planetView) {
-            this.planetView = planetView;
+        function Control(Camera) {
+            this.Camera = Camera;
         }
         return Control;
     })();

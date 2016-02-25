@@ -4,10 +4,10 @@ module objects {
     // CONTROL CLASS ++++++++++++++++++++++++++++++++++++++++++
     export class Control { 
         //PUBLIC INSTANCE VARIABLES +++++++++++++++++++++++++++
-        public planetView: boolean;
+        public Camera:number;
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++
-        constructor(planetView:boolean) {
-           this.planetView = planetView;
+        constructor(Camera:number) {
+           this.Camera = Camera;
         }
         
         //PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++

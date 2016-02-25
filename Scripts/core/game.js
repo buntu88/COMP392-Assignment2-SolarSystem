@@ -67,6 +67,7 @@ var planet4;
 var planet5;
 var planet6;
 var planet7;
+var cam;
 function init() {
     // Instantiate a new Scene object
     scene = new Scene();
@@ -238,6 +239,10 @@ function init() {
     scene.add(spotLight7);
     scene.add(spotLight8);
     console.log("Added a SpotLight Light to Scene");
+    // add controls
+    gui = new GUI();
+    control = new Control(0);
+    addControl(control);
     addStatsObject();
     console.log("Added Stats to scene...");
     document.body.appendChild(renderer.domElement);
@@ -254,7 +259,7 @@ function onResize() {
     renderer.setSize(CScreen.WIDTH, CScreen.HEIGHT);
 }
 function addControl(controlObject) {
-    gui.add(controlObject, 'rotationSpeed', -0.5, 0.5);
+    gui.add(controlObject, 'Camera', 0, 1);
 }
 function addStatsObject() {
     stats = new Stats();
@@ -274,10 +279,15 @@ function gameLoop() {
     iplanet5.rotation.y += 0.01;
     iplanet6.rotation.y += 0.03;
     iplanet7.rotation.y += 0.02;
+    cam = control.Camera;
     // render using requestAnimationFrame
     requestAnimationFrame(gameLoop);
-    // render the scene
-    renderer.render(scene, camera1);
+    if (cam < 0.5) {
+        renderer.render(scene, camera1);
+    }
+    else {
+        renderer.render(scene, camera2);
+    }
 }
 // Setup default renderer
 function setupRenderer() {

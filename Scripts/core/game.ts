@@ -71,6 +71,9 @@ var planet4;
 var planet5;
 var planet6;
 var planet7;
+var cam: number;
+
+
 
 function init() {
     // Instantiate a new Scene object
@@ -155,12 +158,8 @@ planet4.receiveShadow = true
     planet7 = new THREE.Mesh( geometry7, material7 );
     planet7.position.set(15, 0, 0);
     planet7.castShadow = true;
-planet7.receiveShadow = true
+    planet7.receiveShadow = true
     
-
-
-
-
 
 
 
@@ -290,6 +289,12 @@ planet7.receiveShadow = true
     
     console.log("Added a SpotLight Light to Scene");
 
+    // add controls
+    gui = new GUI();
+    control = new Control(0);
+    addControl(control);
+
+
     addStatsObject();
     console.log("Added Stats to scene...");
 
@@ -310,7 +315,7 @@ function onResize(): void {
 }
 
 function addControl(controlObject: Control): void {
-    gui.add(controlObject, 'rotationSpeed',-0.5,0.5);
+    gui.add(controlObject, 'Camera',0,1);
 }
 
 function addStatsObject() {
@@ -334,11 +339,20 @@ function gameLoop(): void {
     iplanet6.rotation.y += 0.03;
     iplanet7.rotation.y += 0.02;
     
+    
+    cam = control.Camera;
     // render using requestAnimationFrame
     requestAnimationFrame(gameLoop);
 	
-    // render the scene
-    renderer.render(scene, camera1);
+    if(cam < 0.5)
+    {
+        renderer.render(scene, camera1);
+    }
+    else
+    {
+        renderer.render(scene, camera2);
+    }
+    
 }
 
 // Setup default renderer
