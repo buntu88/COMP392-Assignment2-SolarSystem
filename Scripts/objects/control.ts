@@ -4,10 +4,10 @@ module objects {
     // CONTROL CLASS ++++++++++++++++++++++++++++++++++++++++++
     export class Control { 
         //PUBLIC INSTANCE VARIABLES +++++++++++++++++++++++++++
-        public rotationSpeed:number;
+        public planetView: boolean;
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++
-        constructor(rotationSpeed:number) {
-           this.rotationSpeed = rotationSpeed;
+        constructor(planetView:boolean) {
+           this.planetView = planetView;
         }
         
         //PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++
