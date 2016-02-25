@@ -138,6 +138,7 @@ function init() {
     iplanet3.add(planet3);
     iplanet4.add(planet4);
     iplanet5.add(planet5);
+    planet4.add(camera2);
     planet4.add(iplanet6);
     planet4.add(iplanet7);
     iplanet6.add(planet6);
@@ -156,51 +157,49 @@ function init() {
     
     
     //Add a Plane to the Scene
-    // plane = new gameObject(
-    //     new PlaneGeometry(20, 20, 1, 1),
-    //     new LambertMaterial({ color: 0xff00ff }),
-    //     0, 0, 0);
+    plane = new gameObject(
+        new PlaneGeometry(20, 20, 1, 1),
+        new LambertMaterial({ color: 0xff0000 }),
+        0, 0, 0);
 
-    // plane.rotation.x = -0.5 * Math.PI;
-
-    // scene.add(plane);
+    plane.rotation.x = -0.5 * Math.PI;
+    scene.add(plane);
     // console.log("Added Plane Primitive to scene...");
     
-    // //Add a Cube to the Scene
-    // cubeMaterial = new LambertMaterial({color:0x00ff00});
-    // cubeGeometry = new CubeGeometry(2, 2, 2);
-    // cube = new Mesh(cubeGeometry, cubeMaterial);
-    // cube.castShadow = true;
-    // cube.receiveShadow = true;
-    // cube.position.y = 1;
+    //Add a Cube to the Scene
+    cubeMaterial = new LambertMaterial({color:0x00ff00});
+    cubeGeometry = new CubeGeometry(2, 2, 2);
+    cube = new Mesh(cubeGeometry, cubeMaterial);
+    cube.castShadow = true;
+    cube.receiveShadow = true;
+    cube.position.y = 1;
     
-    // scene.add(cube);
-    // console.log("Added Cube Primitive to scene...");
+    scene.add(cube);
+    console.log("Added Cube Primitive to scene...");
     
     
-    // // Add an AmbientLight to the scene
-    // ambientLight = new AmbientLight(0x090909);
-    // scene.add(ambientLight);
-    // console.log("Added an Ambient Light to Scene");
+    // Add an AmbientLight to the scene
+    ambientLight = new AmbientLight(0x111111);
+    scene.add(ambientLight);
+    console.log("Added an Ambient Light to Scene");
 	
     // Add a SpotLight to the scene
-    spotLight = new SpotLight(0xffffff);
-    spotLight.position.set(0, 0, 0);
-    spotLight.lookAt(planet4);
+    spotLight = new SpotLight(0xffffff,10000,150);
+    spotLight.position.set(0, 15, 25);
+    spotLight.lookAt(new Vector3(0, 0, 0));
     spotLight.castShadow = true;
     spotLight.shadowMapWidth = 1024;
     spotLight.shadowMapHeight = 1024;
+    spotLight.shadowCameraNear = 1;
 
-    spotLight.shadowCameraNear = 500;
-    spotLight.shadowCameraFar = 4000;
-    spotLight.shadowCameraFov = 30;
+    
     scene.add(spotLight);
     console.log("Added a SpotLight Light to Scene");
-    
+
     // add controls
-    gui = new GUI();
-    control = new Control(0);
-    addControl(control);
+    //gui = new GUI();
+    //control = new Control(0);
+    //addControl(control);
 
     // Add framerate stats
     addStatsObject();
@@ -268,18 +267,23 @@ function setupRenderer(): void {
 function setupCamera(): void {
     camera1 = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
     //camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera1.position.x = 0;
-    camera1.position.y = 50;
-    camera1.position.z = 150;
-    camera1.lookAt(new Vector3(0, -25, 0));
+    camera1.position.x = 15;
+    // camera1.position.y = 50;
+    // camera1.position.z = 150;
+        camera1.position.y = 15;
+    camera1.position.z = -25;
+    // camera1.lookAt(new Vector3(0, -25, 0));
+    camera1.lookAt(new Vector3(0, -5, 0));
+    
     console.log("Finished setting up Camera...");
     
     
         camera2 = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
     //camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera2.position.x = 0;
-    camera2.position.y = 30;
-    camera2.position.z = 50;
-    camera2.lookAt(new Vector3(0, 0, 0));
+    camera2.position.y = 10;
+    camera2.position.z = 25;
+
+    camera2.lookAt(new Vector3(0, -5.5, 0));
     console.log("Finished setting up Camera...");
 }
