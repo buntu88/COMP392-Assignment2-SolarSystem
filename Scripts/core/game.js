@@ -4,7 +4,7 @@
 //Last Modified by      Vishal Guleria
 //Date last Modified    February 25,2016
 //Program description   COMP392 - Assignment 2 - Solar System with 5 planets and 1 planet with 2 moons. Used 2 Cameras for the view and can be changed on run time via GUI.    
-//Revision History      v12
+//Revision History      v08
 // THREEJS Aliases
 var Scene = THREE.Scene;
 var Renderer = THREE.WebGLRenderer;
@@ -161,7 +161,7 @@ function init() {
     scene.add(iplanet4);
     scene.add(iplanet5);
     //Adding Spotlights
-    spotLight1 = new SpotLight(0xffffff, 2, 200);
+    spotLight1 = new SpotLight(0xffffff, 2.5, 200);
     spotLight1.position.set(15, 0, 0);
     spotLight1.lookAt(new Vector3(150, 0, 0));
     spotLight1.castShadow = true;
@@ -171,7 +171,7 @@ function init() {
     spotLight1.shadowCameraFar = 1;
     spotLight1.angle = Math.PI / 2;
     spotLight1.shadowCameraVisible = true;
-    spotLight2 = new SpotLight(0xffffff, 2, 200);
+    spotLight2 = new SpotLight(0xffffff, 2.5, 200);
     spotLight2.position.set(-15, 0, 0);
     spotLight2.lookAt(new Vector3(-150, 0, 0));
     spotLight2.castShadow = true;
@@ -181,7 +181,7 @@ function init() {
     spotLight2.shadowCameraFar = 1;
     spotLight2.angle = Math.PI / 2;
     spotLight2.shadowCameraVisible = true;
-    spotLight3 = new SpotLight(0xffffff, 2, 200);
+    spotLight3 = new SpotLight(0xffffff, 2.5, 200);
     spotLight3.position.set(0, 0, 15);
     spotLight3.lookAt(new Vector3(0, 0, 150));
     spotLight3.castShadow = true;
@@ -191,7 +191,7 @@ function init() {
     spotLight3.shadowCameraFar = 1;
     spotLight3.angle = Math.PI / 2;
     spotLight3.shadowCameraVisible = true;
-    spotLight4 = new SpotLight(0xffffff, 2, 200);
+    spotLight4 = new SpotLight(0xffffff, 2.5, 200);
     spotLight4.position.set(0, 0, -15);
     spotLight4.lookAt(new Vector3(0, 0, -150));
     spotLight4.castShadow = true;
@@ -201,7 +201,7 @@ function init() {
     spotLight4.shadowCameraFar = 1;
     spotLight4.angle = Math.PI / 2;
     spotLight4.shadowCameraVisible = true;
-    spotLight5 = new SpotLight(0xffffff, 2, 200);
+    spotLight5 = new SpotLight(0xffffff, 2.5, 200);
     spotLight5.position.set(15, 0, 15);
     spotLight5.lookAt(new Vector3(150, 0, 150));
     spotLight5.castShadow = true;
@@ -211,7 +211,7 @@ function init() {
     spotLight5.shadowCameraFar = 1;
     spotLight5.angle = Math.PI / 2;
     spotLight5.shadowCameraVisible = true;
-    spotLight6 = new SpotLight(0xffffff, 2, 200);
+    spotLight6 = new SpotLight(0xffffff, 2.5, 200);
     spotLight6.position.set(-15, 0, 15);
     spotLight6.lookAt(new Vector3(-150, 0, -150));
     spotLight6.castShadow = true;
@@ -221,7 +221,7 @@ function init() {
     spotLight6.shadowCameraFar = 1;
     spotLight6.angle = Math.PI / 2;
     spotLight6.shadowCameraVisible = true;
-    spotLight7 = new SpotLight(0xffffff, 2, 200);
+    spotLight7 = new SpotLight(0xffffff, 2.5, 200);
     spotLight7.position.set(15, 0, -15);
     spotLight7.lookAt(new Vector3(150, 0, -150));
     spotLight7.castShadow = true;
@@ -231,7 +231,7 @@ function init() {
     spotLight7.shadowCameraFar = 1;
     spotLight7.angle = Math.PI / 2;
     spotLight7.shadowCameraVisible = true;
-    spotLight8 = new SpotLight(0xffffff, 2, 200);
+    spotLight8 = new SpotLight(0xffffff, 2.5, 200);
     spotLight8.position.set(-15, 0, -15);
     spotLight8.lookAt(new Vector3(-150, 0, -150));
     spotLight8.castShadow = true;
@@ -242,7 +242,7 @@ function init() {
     spotLight8.angle = Math.PI / 2;
     spotLight8.shadowCameraVisible = true;
     //Adding spotlight to scene
-    ambientLight = new AmbientLight(0x010101);
+    ambientLight = new AmbientLight(0x11111);
     scene.add(ambientLight);
     scene.add(spotLight1);
     scene.add(spotLight2);
@@ -306,7 +306,7 @@ function gameLoop() {
 // Setup default renderer
 function setupRenderer() {
     renderer = new Renderer();
-    renderer.setClearColor(0x000000, 1.0);
+    renderer.setClearColor(0x111111, 1.0);
     renderer.setSize(CScreen.WIDTH, CScreen.HEIGHT);
     //renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;

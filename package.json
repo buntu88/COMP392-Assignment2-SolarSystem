@@ -1,6 +1,6 @@
 {
   "name": "Comp392-Assignment2-SolarSystem",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "COMP392 - Assignment2-SolarSystem",
   "main": "game.js",
   "dependencies": {
