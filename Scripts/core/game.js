@@ -37,6 +37,7 @@ var scene;
 var renderer;
 var camera1;
 var camera2;
+var camera3;
 var axes;
 var cube;
 var plane;
@@ -72,6 +73,8 @@ var planet4;
 var planet5;
 var planet6;
 var planet7;
+var iplanet8;
+var planet8;
 var cam;
 function init() {
     // Instantiate a new Scene object
@@ -125,7 +128,7 @@ function init() {
     iplanet5.position.set(0, 0, 0);
     planet5 = new THREE.Mesh(geometry5, material5);
     planet5.position.set(100, 0, 0);
-    //Adding planet 6
+    //Adding moon 1
     var geometry6 = new THREE.SphereGeometry(1.2, 32, 32);
     var material6 = new THREE.MeshLambertMaterial({ color: 0xFEFCD7 });
     iplanet6 = new Mesh;
@@ -134,7 +137,7 @@ function init() {
     planet6.position.set(10, 0, 0);
     planet6.castShadow = true;
     planet6.receiveShadow = true;
-    //Adding planet 7
+    //Adding moon 2
     var geometry7 = new THREE.SphereGeometry(.8, 32, 32);
     var material7 = new THREE.MeshLambertMaterial({ color: 0x5b5ddf });
     iplanet7 = new Mesh;
@@ -143,6 +146,15 @@ function init() {
     planet7.position.set(15, 0, 0);
     planet7.castShadow = true;
     planet7.receiveShadow = true;
+    //Adding moon 3
+    var geometry8 = new THREE.SphereGeometry(.5, 32, 32);
+    var material8 = new THREE.MeshLambertMaterial({ color: 0x5b5ddf });
+    iplanet8 = new Mesh;
+    iplanet8.position.set(0, 0, 0);
+    planet8 = new THREE.Mesh(geometry8, material8);
+    planet8.position.set(5, 0, 0);
+    planet8.castShadow = true;
+    planet8.receiveShadow = true;
     // Adding empty object and Planets to respective objects
     iplanet1.add(planet1);
     iplanet2.add(planet2);
@@ -151,9 +163,12 @@ function init() {
     iplanet5.add(planet5);
     planet4.add(camera2);
     planet4.add(iplanet6);
+    planet5.add(camera3);
+    planet5.add(iplanet8);
     planet4.add(iplanet7);
     iplanet6.add(planet6);
     iplanet7.add(planet7);
+    iplanet8.add(planet8);
     scene.add(sun);
     scene.add(iplanet1);
     scene.add(iplanet2);
@@ -266,9 +281,11 @@ function init() {
 function onResize() {
     camera1.aspect = CScreen.RATIO;
     camera2.aspect = CScreen.RATIO;
+    camera3.aspect = CScreen.RATIO;
     //camera.aspect = window.innerWidth / window.innerHeight;
     camera1.updateProjectionMatrix();
     camera2.updateProjectionMatrix();
+    camera3.updateProjectionMatrix();
     //renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setSize(CScreen.WIDTH, CScreen.HEIGHT);
 }
@@ -293,14 +310,18 @@ function gameLoop() {
     iplanet5.rotation.y += 0.01;
     iplanet6.rotation.y += 0.03;
     iplanet7.rotation.y += 0.02;
+    iplanet8.rotation.y += 0.01;
     cam = control.Camera;
     // render using requestAnimationFrame
     requestAnimationFrame(gameLoop);
-    if (cam < 0.5) {
+    if (cam < 0.3) {
         renderer.render(scene, camera1);
     }
-    else {
+    else if (cam >= 0.3 && cam < 0.7) {
         renderer.render(scene, camera2);
+    }
+    else {
+        renderer.render(scene, camera3);
     }
 }
 // Setup default renderer
@@ -308,7 +329,6 @@ function setupRenderer() {
     renderer = new Renderer();
     renderer.setClearColor(0x111111, 1.0);
     renderer.setSize(CScreen.WIDTH, CScreen.HEIGHT);
-    //renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMapType = THREE.PCFSoftShadowMap;
     console.log("Finished setting up Renderer...");
@@ -316,19 +336,23 @@ function setupRenderer() {
 // Setup main camera for the scene
 function setupCamera() {
     camera1 = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
-    //camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera1.position.x = 15;
     camera1.position.y = 50;
     camera1.position.z = 150;
     camera1.lookAt(new Vector3(0, -25, 0));
-    console.log("Finished setting up Camera...");
+    console.log("Finished setting up Camera1...");
     camera2 = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
-    //camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera2.position.x = 0;
     camera2.position.y = 10;
     camera2.position.z = 25;
     camera2.lookAt(new Vector3(0, -5.5, 0));
-    console.log("Finished setting up Camera...");
+    console.log("Finished setting up Camera2...");
+    camera3 = new PerspectiveCamera(45, config.Screen.RATIO, 0.1, 1000);
+    camera3.position.x = 0;
+    camera3.position.y = 10;
+    camera3.position.z = 25;
+    camera3.lookAt(new Vector3(0, -5.5, 0));
+    console.log("Finished setting up Camera3...");
 }
 
 //# sourceMappingURL=game.js.map
